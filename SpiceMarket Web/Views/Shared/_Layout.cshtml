@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SpiceMarket</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("SpiceMarket", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Add other menu items here if needed -->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="@Url.Action("Cos", "Home")">
+                            <img src="../Content/images/cart.png" alt="Coș" style="height: 24px; width: 24px;" />
+                        </a>
+                    </li>
+                    <li><a href="@Url.Action("Autentificare", "Home")">Autentificare</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar left-sidebar">
+            <h3>Despre Condimente</h3>
+            <p>Condimentele au fost folosite de secole pentru a adăuga aromă și gust mâncărurilor.</p>
+            <ul>
+                <li><a href="#">Istoria condimentelor</a></li>
+                <li><a href="#">Beneficii pentru sănătate</a></li>
+                <li><a href="#">Rețete populare</a></li>
+            </ul>
+        </div>
+        <div class="content-container">
+            @RenderBody()
+        </div>
+        <div class="sidebar right-sidebar">
+            <h3>Oferte Speciale</h3>
+            <p>Descoperă cele mai recente reduceri la condimente premium!</p>
+            <ul>
+                <li><a href="#">Reducere 20% la Scorțișoară</a></li>
+                <li><a href="#">Ofertă limitată la Piper</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>© @DateTime.Now.Year - SpiceMarket</p>
+    </footer>
+</body>
+</html>

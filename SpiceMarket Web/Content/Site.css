@@ -1,0 +1,165 @@
+﻿/* Stiluri pentru bara de navigare */
+.navbar-default {
+    background-color: #ff4500; /* Roșu-portocaliu */
+    border-color: #ff4500;
+}
+
+    .navbar-default .navbar-brand,
+    .navbar-default .navbar-nav > li > a {
+        color: #fff; /* Text alb pentru contrast */
+    }
+
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-nav > li > a:hover {
+            color: #ddd; /* O nuanță mai deschisă la hover */
+        }
+
+/* Product cards */
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-title {
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* General tweaks */
+body {
+    padding-top: 70px; /* Spațiu pentru bara de navigare fixă */
+    font-family: Arial, sans-serif;
+}
+
+/* Main container as a flexbox */
+.main-container {
+    display: flex;
+    min-height: 100vh; /* Full height of the viewport */
+    flex-direction: row; /* Ensure items are laid out horizontally */
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 200px; /* Fixed width, adjust as you like */
+    background-color: #f8f9fa; /* Light gray for a clean look */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Fancy shadow effect */
+}
+
+.left-sidebar {
+    order: 1; /* Stays on the left */
+}
+
+.content-container {
+    order: 2; /* Stays in the center */
+    flex-grow: 1; /* Takes up the remaining space */
+    padding: 20px;
+}
+
+.right-sidebar {
+    order: 3; /* Stays on the right */
+}
+
+/* Make the sidebar text look good */
+.sidebar h3 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.sidebar p {
+    font-size: 1em;
+    color: #666;
+}
+
+/* Responsive tweak: hide sidebars on small screens */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .content-container {
+        width: 100%;
+    }
+}
+/* Total Price Section */
+.total-price-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa; /* Light gray background */
+    border-radius: 5px;
+    text-align: right; /* Align the total to the right */
+}
+
+    .total-price-section h3 {
+        margin: 0;
+        font-size: 1.5em;
+        color: #333;
+    }
+.product-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Fixed space for the image */
+.product-image-wrapper {
+    height: 200px; /* Fixed height for the image area - adjust as needed */
+    width: 100%; /* Full width of the card */
+    display: flex; /* Use flexbox to center the image */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    overflow: hidden; /* Hide overflow if image exceeds container */
+}
+
+/* Image inside the wrapper */
+.product-image {
+    object-fit: cover; /* Maintain aspect ratio and fill the space */
+}
+
+/* Fixed space for the text and button */
+.product-text-area {
+    padding: 10px; /* Consistent padding */
+    text-align: center; /* Center the text and button */
+    min-height: 100px; /* Fixed minimum height for the text area - adjust as needed */
+    display: flex; /* Use flexbox to center content vertically */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Center content vertically */
+}
+
+/* Ensure cards are uniform */
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure the card stretches to fit content */
+}
+
+/* Tighten the layout */
+.row {
+    margin-bottom: 5px;
+}
+
+.col-md-4 {
+    padding: 2px;
+}
+
+.card {
+    margin-bottom: 5px;
+}
+
+
+
+
+/* Card body */
+.card-body {
+    padding: 10px; /* Ensure minimal padding */
+    margin: 0; /* Remove any extra margins */
+}
+
+.sidebar ul {
+    padding-left: 20px; /* Adjusts the indentation of the bullet points */
+    margin: 0; /* Removes any default margins that might interfere */
+}
+.sidebar h3, .sidebar p {
+    margin-left: 0;
+}

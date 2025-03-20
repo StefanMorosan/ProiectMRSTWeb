@@ -1,0 +1,24 @@
+﻿@model List<SpiceMarket_Web.Models.Produs>
+@{
+    ViewBag.Title = "Acasă";
+}
+
+<div class="container">
+    <h3>Produse disponibile:</h3>
+    <div class="row">
+        @foreach (var produs in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="product-image-wrapper">
+                        <img src="@Url.Content(produs.CaleImagine)" alt="@produs.Nume" class="product-image" style="height: @(produs.ImageHeight)px; width: @(produs.ImageWidth)px; object-fit: cover;" />
+                    </div>
+                    <div class="product-text-area">
+                        <h5 class="card-title">@produs.Nume <small class="text-muted">(@produs.Pret MDL/kg)</small></h5>
+                        <a href="@Url.Action("AdaugaInCos", "Home", new { produs = produs.Nume })" class="btn btn-success">Adaugă în coș</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

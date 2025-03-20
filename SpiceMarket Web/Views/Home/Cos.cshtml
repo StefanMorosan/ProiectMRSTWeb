@@ -1,0 +1,69 @@
+﻿@model List<SpiceMarket_Web.Models.CartItem>
+@{
+    ViewBag.Title = "Coșul meu";
+    // Define the product list in the view to look up prices
+    var produse = new List<SpiceMarket_Web.Models.Produs>
+{
+        new SpiceMarket_Web.Models.Produs { Nume = "Scorțișoară", Pret = 80m },
+        new SpiceMarket_Web.Models.Produs { Nume = "Curcuma", Pret = 70m },
+        new SpiceMarket_Web.Models.Produs { Nume = "Piper", Pret = 90m },
+        new SpiceMarket_Web.Models.Produs { Nume = "Ghimbir", Pret = 60m },
+        new SpiceMarket_Web.Models.Produs { Nume = "Paprika", Pret = 75m },
+        new SpiceMarket_Web.Models.Produs { Nume = "Cardamom", Pret = 120m },
+        new SpiceMarket_Web.Models.Produs { Nume = "Turmeric", Pret = 70m }
+    };
+
+    // Calculate the total price
+    decimal totalPrice = 0m;
+    if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            var produs = produse.FirstOrDefault(p => p.Nume == item.Nume);
+            var pretPerKg = produs != null ? produs.Pret : 0m;
+            totalPrice += pretPerKg * item.Cantitate;
+        }
+    }
+}
+
+<div class="container">
+    <h2>Coșul tău de cumpărături</h2>
+    @if (Model == null || Model.Count == 0)
+    {
+        <p>Coșul tău este gol.</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Produs</th>
+                    <th>Cantitate (kg)</th>
+                    <th>Preț per kg (MDL)</th>
+                    <th>Preț total (MDL)</th>
+                    <th>Acțiuni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var produs = produse.FirstOrDefault(p => p.Nume == item.Nume);
+                    var pretPerKg = produs != null ? produs.Pret : 0m;
+                    var pretTotal = pretPerKg * item.Cantitate;
+                    <tr>
+                        <td>@item.Nume</td>
+                        <td>@item.Cantitate</td>
+                        <td>@pretPerKg</td>
+                        <td>@pretTotal</td>
+                        <td><a href="@Url.Action("EliminaDinCos", "Home", new { produs = item.Nume })" class="btn btn-danger btn-sm">Elimină</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Total Price Section -->
+        <div class="total-price-section">
+            <h3>Total: @totalPrice MDL</h3>
+        </div>
+    }
+</div>
