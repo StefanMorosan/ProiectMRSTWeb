@@ -1,4 +1,6 @@
 ﻿// BusinessLogic/Services/CartService.cs
+using SpiceMarket_Web.Domain.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SpiceMarket_Web.BusinessLogic.Services
@@ -28,7 +30,7 @@ namespace SpiceMarket_Web.BusinessLogic.Services
             }
             else
             {
-                cart.Add(new SpiceMarket.Domain.Models.CartItem { Nume = productName, Cantitate = quantity, Pret = product.Pret });
+                cart.Add(new CartItem{ Nume = productName, Cantitate = quantity, Pret = product.Pret });
             }
             _cartStorage.SaveCart(cart);
         }
@@ -51,7 +53,7 @@ namespace SpiceMarket_Web.BusinessLogic.Services
             }
         }
 
-        public System.Collections.Generic.List<SpiceMarket.Domain.Models.CartItem> GetCartItems()
+        public List<CartItem> GetCartItems()
         {
             return _cartStorage.GetCart();
         }

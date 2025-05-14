@@ -1,0 +1,1 @@
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="SpiceMarket_Web.MvcApplication" Language="C#" %>

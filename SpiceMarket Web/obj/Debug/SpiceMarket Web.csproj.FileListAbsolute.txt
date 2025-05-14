@@ -1,2 +1,0 @@
-D:\SpiceMarket Web\SpiceMarket Web\obj\Debug\SpiceMarket Web.csproj.AssemblyReference.cache
-D:\SpiceMarket Web\SpiceMarket Web\obj\Debug\SpiceMarket Web.csproj.CoreCompileInputs.cache
