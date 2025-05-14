@@ -5,6 +5,17 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpiceMarket Web", "SpiceMarket Web\SpiceMarket Web.csproj", "{EB3A180F-43D3-4577-9CDF-640310324B2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpiceMarket.BusinessLogic", "SpiceMarket.BusinessLogic\SpiceMarket.BusinessLogic.csproj", "{158A5592-2FA0-4658-A7CE-D9EE93DE90B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpiceMarket.Domain", "SpiceMarket.Domain\SpiceMarket.Domain.csproj", "{4E652C28-A8C3-4F9B-BAF1-D7B363C5ACCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpiceMarket.Helpers", "SpiceMarket.Helpers\SpiceMarket.Helpers.csproj", "{A17CA36C-5464-4E5D-95C8-2DCF739C1B71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{140707C2-CF8B-4D3A-94F0-D1E114A3FF9F}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +26,18 @@ Global
 		{EB3A180F-43D3-4577-9CDF-640310324B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB3A180F-43D3-4577-9CDF-640310324B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB3A180F-43D3-4577-9CDF-640310324B2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{158A5592-2FA0-4658-A7CE-D9EE93DE90B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{158A5592-2FA0-4658-A7CE-D9EE93DE90B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{158A5592-2FA0-4658-A7CE-D9EE93DE90B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{158A5592-2FA0-4658-A7CE-D9EE93DE90B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E652C28-A8C3-4F9B-BAF1-D7B363C5ACCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E652C28-A8C3-4F9B-BAF1-D7B363C5ACCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E652C28-A8C3-4F9B-BAF1-D7B363C5ACCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E652C28-A8C3-4F9B-BAF1-D7B363C5ACCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A17CA36C-5464-4E5D-95C8-2DCF739C1B71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A17CA36C-5464-4E5D-95C8-2DCF739C1B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A17CA36C-5464-4E5D-95C8-2DCF739C1B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A17CA36C-5464-4E5D-95C8-2DCF739C1B71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
