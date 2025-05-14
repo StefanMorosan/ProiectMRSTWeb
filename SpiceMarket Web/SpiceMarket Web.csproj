@@ -128,8 +128,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CartItem.cs" />
-    <Compile Include="Models\Produs.cs" />
+    <Compile Include="Infrastructure\SessionCartStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +148,20 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpiceMarket.BusinessLogic\SpiceMarket_Web.BusinessLogic.csproj">
+      <Project>{158a5592-2fa0-4658-a7ce-d9ee93de90b9}</Project>
+      <Name>SpiceMarket_Web.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpiceMarket.Domain\SpiceMarket_Web.Domain.csproj">
+      <Project>{4e652c28-a8c3-4f9b-baf1-d7b363c5accf}</Project>
+      <Name>SpiceMarket_Web.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpiceMarket.Helpers\SpiceMarket_Web.Helpers.csproj">
+      <Project>{a17ca36c-5464-4e5d-95c8-2dcf739c1b71}</Project>
+      <Name>SpiceMarket_Web.Helpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
