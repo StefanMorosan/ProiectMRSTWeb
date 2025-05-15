@@ -4,19 +4,57 @@
 
 <div class="container">
     <h2>Autentificare</h2>
+
+    @* Success message after registration *@
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @* Error message for bad login *@
     @if (ViewBag.MesajEroare != null)
     {
-        <div class="alert alert-danger">@ViewBag.MesajEroare</div>
+        <div class="alert alert-danger">
+            @ViewBag.MesajEroare
+        </div>
     }
-    <form method="post" action="@Url.Action("Autentificare", "Home")">
+
+    @using (Html.BeginForm("Autentificare", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+
         <div class="form-group">
-            <label for="numeUtilizator">Nume utilizator:</label>
-            <input type="text" class="form-control" id="numeUtilizator" name="numeUtilizator" />
+            <label for="numeUtilizator" class="control-label col-md-2">Nume utilizator:</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="numeUtilizator" name="numeUtilizator" />
+            </div>
         </div>
+
         <div class="form-group">
-            <label for="parola">Parolă:</label>
-            <input type="password" class="form-control" id="parola" name="parola" />
+            <label for="parola" class="control-label col-md-2">Parolă:</label>
+            <div class="col-md-6">
+                <input type="password" class="form-control" id="parola" name="parola" />
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Autentificare</button>
-    </form>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <button type="submit" class="btn btn-primary">Autentificare</button>
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-6">
+            @Html.ActionLink(
+                linkText: "Nu ai cont? Înregistrează‑te aici",
+                actionName: "Inregistrare",
+                controllerName: "Home",
+                routeValues: null,
+                htmlAttributes: new { @class = "btn btn-link" }
+            )
+        </div>
+    </div>
 </div>
