@@ -30,7 +30,28 @@
                             <img src="../Content/images/cart.png" alt="Coș" style="height: 24px; width: 24px;" />
                         </a>
                     </li>
-                    <li><a href="@Url.Action("Autentificare", "Home")">Autentificare</a></li>
+                    @{
+                        var user = Session["Utilizator"] as string;
+                        if (string.IsNullOrEmpty(user))
+                        {
+                            <li><a href="@Url.Action("Autentificare", "Home")">Autentificare</a></li>
+                        }
+                        else
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span class="glyphicon glyphicon-user"></span> @user <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Achiziții anterioare", "Achizitii", "Home")</li>
+                                    <li>@Html.ActionLink("Profil", "Profil", "Home")</li>
+                                    <li>@Html.ActionLink("Setări cont", "Setari", "Home")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Deconectare", "Deconectare", "Home")</li>
+                                </ul>
+                            </li>
+                        }
+                    }
                 </ul>
             </div>
         </div>

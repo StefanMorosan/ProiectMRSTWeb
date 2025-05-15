@@ -25,6 +25,7 @@ namespace SpiceMarket_Web.Controllers
         }
 
         // GET: /Home/Autentificare
+        [HttpGet]
         public ActionResult Autentificare()
         {
             return View();
@@ -112,6 +113,34 @@ namespace SpiceMarket_Web.Controllers
         {
             _cartService.RemoveFromCart(produs);
             return RedirectToAction("Cos");
+        }
+
+        // GET: /Home/Achizitii
+        public ActionResult Achizitii()
+        {
+            // TODO: load past purchases for the logged‑in user
+            return View();
+        }
+
+        // GET: /Home/Profil
+        public ActionResult Profil()
+        {
+            // TODO: load and edit basic profile info
+            return View();
+        }
+
+        // GET: /Home/Setari
+        public ActionResult Setari()
+        {
+            // TODO: account settings (password change, email prefs, etc.)
+            return View();
+        }
+
+        // GET: /Home/Deconectare
+        public ActionResult Deconectare()
+        {
+            Session.Clear();
+            return RedirectToAction("Index");
         }
     }
 }

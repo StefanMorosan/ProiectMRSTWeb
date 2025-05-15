@@ -147,6 +147,9 @@
     <Content Include="Views\Home\Autentificare.cshtml" />
     <Content Include="Views\Home\Cos.cshtml" />
     <Content Include="Views\Home\Inregistrare.cshtml" />
+    <Content Include="Views\Home\Achizitii.cshtml" />
+    <Content Include="Views\Home\Profil.cshtml" />
+    <Content Include="Views\Home\Setari.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
