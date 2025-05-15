@@ -14,7 +14,7 @@
             color: #ddd; /* O nuanță mai deschisă la hover */
         }
 
-/* Product cards */
+/* Produsele */
 .card {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
@@ -37,7 +37,7 @@ body {
     flex-direction: row; /* Ensure items are laid out horizontally */
 }
 
-/* Sidebar styling */
+/* Sidebar  */
 .sidebar {
     width: 200px; /* Fixed width, adjust as you like */
     background-color: #f8f9fa; /* Light gray for a clean look */

@@ -1,0 +1,20 @@
+﻿@model List<SpiceMarket_Web.Domain.Models.Produs>
+@{
+    ViewBag.Title = "Gestionare Produse";
+}
+<h2>Produse</h2>
+<p>@Html.ActionLink("Adaugă produs nou", "CreateProduct", "Admin", null, new { @class = "btn btn-success" })</p>
+<table class="table table-striped">
+    <tr><th>Nume</th><th>Pret</th><th>Acțiuni</th></tr>
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.Nume</td>
+            <td>@p.Pret</td>
+            <td>
+                @Html.ActionLink("Editează", "EditProduct", new { id = p.Id }, new { @class = "btn btn-xs btn-primary" })
+                @Html.ActionLink("Șterge", "DeleteProduct", new { id = p.Id }, new { @class = "btn btn-xs btn-danger" })
+            </td>
+        </tr>
+    }
+</table>

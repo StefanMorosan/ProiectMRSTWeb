@@ -59,6 +59,10 @@
     <Compile Include="Migrations\202505150853285_InitialCreate1.Designer.cs">
       <DependentUpon>202505150853285_InitialCreate1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505151833434_AddRoleToUtilizator.cs" />
+    <Compile Include="Migrations\202505151833434_AddRoleToUtilizator.Designer.cs">
+      <DependentUpon>202505151833434_AddRoleToUtilizator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Produs.cs" />
@@ -76,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505150853285_InitialCreate1.resx">
       <DependentUpon>202505150853285_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505151833434_AddRoleToUtilizator.resx">
+      <DependentUpon>202505151833434_AddRoleToUtilizator.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

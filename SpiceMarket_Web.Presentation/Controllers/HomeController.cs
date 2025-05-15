@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using SpiceMarket_Web.BusinessLogic.Interfaces;
 using SpiceMarket_Web.BusinessLogic.Services;
 using SpiceMarket_Web.Domain.Models;
+using SpiceMarket_Web.Presentation.Filters; // Import custom filters
 
 namespace SpiceMarket_Web.Controllers
 {
@@ -17,21 +18,17 @@ namespace SpiceMarket_Web.Controllers
             _cartService = cartService;
         }
 
-        // GET: /Home/Index
         public ActionResult Index()
         {
             var products = _productRepository.GetAllProducts();
             return View(products);
         }
 
-        // GET: /Home/Autentificare
-        [HttpGet]
         public ActionResult Autentificare()
         {
             return View();
         }
 
-        // POST: /Home/Autentificare
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Autentificare(string numeUtilizator, string parola)
@@ -39,13 +36,12 @@ namespace SpiceMarket_Web.Controllers
             using (var db = new SpiceMarketContext())
             {
                 var user = db.Utilizatori
-                             .FirstOrDefault(u =>
-                                 u.NumeUtilizator == numeUtilizator &&
-                                 u.Parola == parola);
+                    .FirstOrDefault(u => u.NumeUtilizator == numeUtilizator && u.Parola == parola);
 
                 if (user != null)
                 {
                     Session["Utilizator"] = user.NumeUtilizator;
+                    Session["Rol"] = user.Rol; 
                     return RedirectToAction("Index");
                 }
             }
@@ -54,14 +50,12 @@ namespace SpiceMarket_Web.Controllers
             return View();
         }
 
-        // GET: /Home/Inregistrare
         [HttpGet]
         public ActionResult Inregistrare()
         {
             return View();
         }
 
-        // POST: /Home/Inregistrare
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Inregistrare(Utilizator model)
@@ -77,6 +71,7 @@ namespace SpiceMarket_Web.Controllers
                     return View(model);
                 }
 
+                model.Rol = "utilizator"; // Utilizator normal
                 db.Utilizatori.Add(model);
                 db.SaveChanges();
             }
@@ -85,7 +80,7 @@ namespace SpiceMarket_Web.Controllers
             return RedirectToAction("Autentificare");
         }
 
-        // GET: /Home/Cos
+        [UserMod]
         public ActionResult Cos()
         {
             var cartItems = _cartService.GetCartItems();
@@ -93,7 +88,7 @@ namespace SpiceMarket_Web.Controllers
             return View(cartItems);
         }
 
-        // GET: /Home/AdaugaInCos
+        [UserMod]
         public ActionResult AdaugaInCos(string produs)
         {
             try
@@ -108,35 +103,31 @@ namespace SpiceMarket_Web.Controllers
             }
         }
 
-        // GET: /Home/EliminaDinCos
+        [UserMod]
         public ActionResult EliminaDinCos(string produs)
         {
             _cartService.RemoveFromCart(produs);
             return RedirectToAction("Cos");
         }
 
-        // GET: /Home/Achizitii
+        [UserMod]
         public ActionResult Achizitii()
         {
-            // TODO: load past purchases for the logged‑in user
             return View();
         }
 
-        // GET: /Home/Profil
-        public ActionResult Profil()
-        {
-            // TODO: load and edit basic profile info
-            return View();
-        }
-
-        // GET: /Home/Setari
+        [UserMod]
         public ActionResult Setari()
         {
-            // TODO: account settings (password change, email prefs, etc.)
             return View();
         }
 
-        // GET: /Home/Deconectare
+        [AdminMod]
+        public ActionResult SecretReport()
+        {
+            return View(); // Accesibil doar adminului
+        }
+
         public ActionResult Deconectare()
         {
             Session.Clear();

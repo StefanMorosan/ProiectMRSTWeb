@@ -1,0 +1,23 @@
+﻿@model List<SpiceMarket_Web.Domain.Models.Utilizator>
+@{
+    ViewBag.Title = "Gestionare Utilizatori";
+}
+<h2>Utilizatori</h2>
+<table class="table">
+    <tr><th>Username</th><th>Email</th><th>Rol</th><th>Acțiune</th></tr>
+    @foreach (var u in Model)
+    {
+        <tr>
+            <td>@u.NumeUtilizator</td>
+            <td>@u.Email</td>
+            <td>@u.Rol</td>
+            <td>
+                @Html.ActionLink(
+                    u.Rol == "admin" ? "Revocă drepturi" : "Acordă admin",
+                    "ToggleRole",
+                    new { id = u.Id },
+                    new { @class = "btn btn-xs btn-warning" })
+            </td>
+        </tr>
+    }
+</table>
