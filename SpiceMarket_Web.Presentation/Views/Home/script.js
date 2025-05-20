@@ -1,38 +1,50 @@
-﻿const products = [
-    { name: "Scorțișoară", price: 80 },
-    { name: "Ghimbir", price: 60 },
-    { name: "Turmeric", price: 70 },
-    { name: "Curcuma", price: 70 },
-    { name: "Paprika", price: 75 },
-    { name: "Piper", price: 90 },
-    { name: "Cardamom", price: 120 }
+﻿const produse = [
+    { id: 1, denumire: "Laptop Asus", pret: 3200 },
+    { id: 2, denumire: "Telefon Samsung", pret: 2100 },
+    { id: 3, denumire: "Mouse Logitech", pret: 150 },
+    { id: 4, denumire: "Casti Sony", pret: 300 }
 ];
-function renderProducts(productList) {
-    const container = document.getElementById('productContainer');
-    container.innerHTML = ''; // șterge produsele vechi
+const searchInput = document.getElementById("search");
+const resultsDiv = document.getElementById("search-results");
+const cartList = document.getElementById("cart");
+const cart = [];
 
-    productList.forEach(product => {
-        const item = document.createElement('div');
-        item.style.border = '1px solid #ccc';
-        item.style.padding = '10px';
-        item.style.marginBottom = '10px';
-        item.style.borderRadius = '8px';
+searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+    resultsDiv.innerHTML = "";
 
-        item.innerHTML = `
-      <h3>${product.name}</h3>
-      <p>${product.price} MDL/kg</p>
-      <button>Adaugă în coș</button>
+    if (query.length === 0) return;
+
+    const rezultate = produse.filter(p => p.denumire.toLowerCase().includes(query));
+
+    if (rezultate.length === 0) {
+        resultsDiv.innerHTML = "<p>Produsul nu a fost găsit.</p>";
+        return;
+    }
+
+    rezultate.forEach(p => {
+        const container = document.createElement("div");
+        container.innerHTML = `
+      <strong>${p.denumire}</strong><br>
+      Preț: ${p.pret} RON<br>
+      <button onclick="adaugaInCos(${p.id})">Adaugă în coș</button>
+      <hr>
     `;
-        container.appendChild(item);
+        resultsDiv.appendChild(container);
     });
-}
-document.getElementById('searchInput').addEventListener('input', function (e) {
-    const query = e.target.value.toLowerCase();
-
-    const filtered = products.filter(product =>
-        product.name.toLowerCase().includes(query)
-    );
-
-    renderProducts(filtered);
 });
 
+function adaugaInCos(id) {
+    const produs = produse.find(p => p.id === id);
+    cart.push(produs);
+    actualizeazaCos();
+}
+
+function actualizeazaCos() {
+    cartList.innerHTML = "";
+    cart.forEach(p => {
+        const li = document.createElement("li");
+        li.textContent = `${p.denumire} - ${p.pret} RON`;
+        cartList.appendChild(li);
+    });
+}

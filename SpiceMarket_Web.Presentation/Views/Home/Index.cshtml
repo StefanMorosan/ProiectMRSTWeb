@@ -4,9 +4,8 @@
     // get current user (null or empty if guest)
     var user = Session["Utilizator"] as string;
 }
-<input type="text" id="searchInput" placeholder="Caută condiment..." style="width: 300px; padding: 8px; margin: 20px 0;">
-<ul id="searchResults" class="list-group" style="position: absolute; z-index: 1000;"></ul>
-
+<input type="text" id="search" placeholder="Caută produs..." />
+<div id="search-results"></div>
 <div class="container">
     <div id="productContainer"></div>
     <h3>Produse disponibile:</h3>
