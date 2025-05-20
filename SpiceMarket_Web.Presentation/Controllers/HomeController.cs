@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using SpiceMarket_Web.BusinessLogic.Interfaces;
 using SpiceMarket_Web.BusinessLogic.Services;
@@ -11,6 +12,51 @@ namespace SpiceMarket_Web.Controllers
     {
         private readonly IProductRepository _productRepository;
         private readonly CartService _cartService;
+        private readonly SpiceMarketContext db = new SpiceMarketContext();
+
+
+        public JsonResult SearchProducts(string term)
+        {
+            var produse = db.Produse
+                            .Where(p => p.Nume.Contains(term))
+                            .Select(p => new { p.Id, p.Nume, p.Pret })
+                            .Take(5)
+                            .ToList();
+
+            return Json(produse, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult AdaugaInCos(int id)
+        {
+            var produs = db.Produse.FirstOrDefault(p => p.Id == id);
+            if (produs == null)
+                return HttpNotFound();
+
+            // Coș în sesiune
+            List<CartItem> cos = Session["Cos"] as List<CartItem>;
+            if (cos == null)
+                cos = new List<CartItem>();
+
+            var existent = cos.FirstOrDefault(c => c.Produs.Id == id);
+            if (existent != null)
+            {
+                existent.Cantitate++;
+            }
+            else
+            {
+                cos.Add(new CartItem
+                {
+                    Produs = produs,
+                    Cantitate = 1
+                });
+            }
+
+            Session["Cos"] = cos;
+
+            return new HttpStatusCodeResult(200);
+        }
+
 
         public HomeController(IProductRepository productRepository, CartService cartService)
         {

@@ -91,5 +91,104 @@
     <footer>
         <p>© @DateTime.Now.Year - SpiceMarket</p>
     </footer>
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        $(document).ready(function () {
+            $("#searchBox").keyup(function () {
+                $(document).on("click", ".add-to-cart", function () {
+    let produsId = $(this).data("id");
+
+    $.ajax({
+        type: "POST",
+        url: '@Url.Action("AdaugaInCos", "Home")',
+        data: { id: produsId },
+        success: function (response) {
+            alert("Produsul a fost adăugat în coș!");
+            $("#searchResults").empty();
+            $("#searchBox").val("");
+        },
+        error: function () {
+            alert("Eroare la adăugarea în coș.");
+        }
+    });
+});
+
+                let query = $(this).val();
+                if (query.length > 1) {
+                    $.ajax({
+                        url: '@Url.Action("SearchProducts", "Home")',
+                        data: { term: query },
+                        success: function (data) {
+                            let list = $("#searchResults");
+                            list.empty();
+                            if (data.length > 0) {
+                                $.each(data, function (i, item) {
+                                    list.append(`<li class="list-group-item">${item.Nume}</li>`);
+                                });
+                            } else {
+                                list.append(`<li class="list-group-item">Niciun produs găsit</li>`);
+                            }
+                        }
+                    });
+                } else {
+                    $("#searchResults").empty();
+                }
+            });
+        });
+            $(document).ready(function () {
+                $("#searchBox").keyup(function () {
+                    let term = $(this).val();
+                    if (term.length >= 2) {
+                        $.get("/Home/SearchProducts", { term: term }, function (data) {
+                            let list = $("#searchResults");
+                            list.empty();
+                            if (data.length > 0) {
+                                $.each(data, function (i, item) {
+                                    list.append(`
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>${item.Nume}</strong><br />
+                                    <small>${item.Pret} lei</small>
+                                </div>
+                                <button class="btn btn-sm btn-primary ml-2 add-to-cart" data-id="${item.Id}">Adaugă</button>
+                            </li>
+                        `);
+                                });
+                            } else {
+                                list.append(`<li class="list-group-item">Niciun produs găsit</li>`);
+                            }
+                        });
+                    } else {
+                        $("#searchResults").empty();
+                    }
+                });
+
+                // Buton Adaugă
+                $(document).on("click", ".add-to-cart", function () {
+                    let produsId = $(this).data("id");
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Home/AdaugaInCos',
+                        data: { id: produsId },
+                        success: function () {
+                            alert("Produs adăugat în coș!");
+                            $("#searchResults").empty();
+                            $("#searchBox").val("");
+                        },
+                        error: function () {
+                            alert("Eroare la adăugare.");
+                        }
+                    });
+                });
+            });
+
+        </script>
+    }
+    <script src="script.js"></script>
+
+
+
 </body>
 </html>
