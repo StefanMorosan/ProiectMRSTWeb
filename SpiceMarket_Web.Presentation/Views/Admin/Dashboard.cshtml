@@ -1,41 +1,4 @@
 ﻿@model SpiceMarket_Web.Presentation.Models.UserDashboardViewModel
-
-<h2>Bun venit, @Model.Nume!</h2>
-
-<div class="row">
-
-    <div class="col-md-4">
-        <div class="card p-3 shadow-sm">
-            <h5>Informații cont</h5>
-            <p><strong>Email:</strong> @Model.Email</p>
-            <p><strong>Rol:</strong> @Model.Rol</p>
-            <a href="/Cont/Editare" class="btn btn-sm btn-primary">Editează profilul</a>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card p-3 shadow-sm">
-            <h5>Statistici</h5>
-            <ul>
-                <li><strong>Wishlist:</strong> @Model.NrProduseWishlist produse</li>
-                <li><strong>Comenzi:</strong> @Model.NrComenzi plasate</li>
-                <li><strong>Ultima activitate:</strong> @Model.DataUltimaComanda</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card p-3 shadow-sm">
-            <h5>Acțiuni rapide</h5>
-            <a href="/Wishlist/Lista" class="btn btn-outline-secondary btn-block">❤️ Wishlist</a>
-            <a href="/Comenzi/Lista" class="btn btn-outline-secondary btn-block">🛒 Comenzile Mele</a>
-            <a href="/Cont/SchimbaParola" class="btn btn-outline-secondary btn-block">🔒 Schimbă parola</a>
-        </div>
-    </div>
-
-</div>
-
-
 @{
     ViewBag.Title = "Dashboard Admin";
 }
