@@ -15,7 +15,12 @@ namespace SpiceMarket_Web.BusinessLogic.Repositories
             new Produs { Nume = "Ghimbir", Pret = 60m, CaleImagine = "~/Content/images/ghimbir.png", ImageHeight = 140, ImageWidth = 210 },
             new Produs { Nume = "Paprika", Pret = 75m, CaleImagine = "~/Content/images/paprika.png", ImageHeight = 160, ImageWidth = 210 },
             new Produs { Nume = "Cardamom", Pret = 120m, CaleImagine = "~/Content/images/cardamom.png", ImageHeight = 155, ImageWidth = 175 },
-            new Produs { Nume = "Turmeric", Pret = 70m, CaleImagine = "~/Content/images/turmeric.png", ImageHeight = 140, ImageWidth = 210 }
+            new Produs { Nume = "Turmeric", Pret = 70m, CaleImagine = "~/Content/images/turmeric.png", ImageHeight = 140, ImageWidth = 210 },
+            new Produs { Nume = "Piper Negru", Pret = 10, CaleImagine = "~/Content/images/piper.png", ImageHeight = 140, ImageWidth = 210},
+        new Produs { Nume = "Sare de Himalaya", Pret = 8, CaleImagine = "~/Content//images/sare.png" , ImageHeight = 140, ImageWidth = 210},
+        new Produs { Nume = "Chili Pudra", Pret = 12, CaleImagine = "~/Content//images/chili.png" , ImageHeight = 140, ImageWidth = 210},
+        new Produs {Nume = "Boia dulce", Pret = 9, CaleImagine = "~/Content//images/boia.png", ImageHeight = 140, ImageWidth = 210},
+        new Produs {Nume = "Cimbru uscat", Pret = 7, CaleImagine = "~/Content//images/cimbru.png", ImageHeight = 140, ImageWidth = 210},
         };
 
         public Produs GetProductByName(string name)

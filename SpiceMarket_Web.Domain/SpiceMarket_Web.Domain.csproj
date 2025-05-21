@@ -67,10 +67,25 @@
     <Compile Include="Migrations\202505201624566_UpdateModel.Designer.cs">
       <DependentUpon>202505201624566_UpdateModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505210810087_AdaugareCampuriProdus.cs" />
+    <Compile Include="Migrations\202505210810087_AdaugareCampuriProdus.Designer.cs">
+      <DependentUpon>202505210810087_AdaugareCampuriProdus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505210817295_CreareWishList.cs" />
+    <Compile Include="Migrations\202505210817295_CreareWishList.Designer.cs">
+      <DependentUpon>202505210817295_CreareWishList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505210914090_Dashboard.cs" />
+    <Compile Include="Migrations\202505210914090_Dashboard.Designer.cs">
+      <DependentUpon>202505210914090_Dashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\Comanda.cs" />
     <Compile Include="Models\Produs.cs" />
     <Compile Include="Models\SpiceMarketContext.cs" />
+    <Compile Include="Models\UserDashboardViewModel.cs" />
+    <Compile Include="Models\WishlistItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Utilizator.cs" />
   </ItemGroup>
@@ -90,6 +105,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505201624566_UpdateModel.resx">
       <DependentUpon>202505201624566_UpdateModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505210810087_AdaugareCampuriProdus.resx">
+      <DependentUpon>202505210810087_AdaugareCampuriProdus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505210817295_CreareWishList.resx">
+      <DependentUpon>202505210817295_CreareWishList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505210914090_Dashboard.resx">
+      <DependentUpon>202505210914090_Dashboard.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
