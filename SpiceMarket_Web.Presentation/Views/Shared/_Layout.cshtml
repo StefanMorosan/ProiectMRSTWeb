@@ -187,21 +187,6 @@
         </script>
     }
     <script src="script.js"></script>
-    <script>
-        document.getElementById("search").addEventListener("input", function () {
-            let query = this.value;
-
-            if (query.length > 1) {
-                fetch("cautare.php?q=" + encodeURIComponent(query))
-                    .then(response => response.text())
-                    .then(data => {
-                        document.getElementById("search-results").innerHTML = data;
-                    });
-            } else {
-                document.getElementById("search-results").innerHTML = "";
-            }
-        });
-    </script>
 
 
 
