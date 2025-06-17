@@ -79,10 +79,6 @@
     <Compile Include="Migrations\202505210914090_Dashboard.Designer.cs">
       <DependentUpon>202505210914090_Dashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202505211806077_ProfilUtilizator.cs" />
-    <Compile Include="Migrations\202505211806077_ProfilUtilizator.Designer.cs">
-      <DependentUpon>202505211806077_ProfilUtilizator.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Comanda.cs" />
@@ -118,9 +114,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505210914090_Dashboard.resx">
       <DependentUpon>202505210914090_Dashboard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505211806077_ProfilUtilizator.resx">
-      <DependentUpon>202505211806077_ProfilUtilizator.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

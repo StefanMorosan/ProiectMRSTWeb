@@ -182,5 +182,28 @@ namespace SpiceMarket_Web.Controllers
             Session.Clear();
             return RedirectToAction("Index");
         }
+        public ActionResult Dashboard()
+{
+    var utilizator = Session["Utilizator"] as string;
+    if (string.IsNullOrEmpty(utilizator))
+        return RedirectToAction("Autentificare", "Home");
+
+    var model = new UserDashboardViewModel
+    {
+        Nume = utilizator,
+        Email = db.Utilizatori.FirstOrDefault(u => u.NumeUtilizator == utilizator)?.Email,
+        Rol = "Client", // exemplu hardcodat
+        NrProduseWishlist = db.Wishlist.Count(w => w.Utilizator == utilizator),
+        NrComenzi = db.Comenzi.Count(c => c.Utilizator == utilizator),
+        DataUltimaComanda = db.Comenzi
+            .Where(c => c.Utilizator == utilizator)
+            .OrderByDescending(c => c.Data)
+            .Select(c => (DateTime)c.Data)
+            .FirstOrDefault()
+    };
+
+    return View(model);
+}
+
     }
 }
