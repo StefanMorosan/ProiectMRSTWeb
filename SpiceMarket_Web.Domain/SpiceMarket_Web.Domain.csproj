@@ -63,10 +63,6 @@
     <Compile Include="Migrations\202505151833434_AddRoleToUtilizator.Designer.cs">
       <DependentUpon>202505151833434_AddRoleToUtilizator.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202505201624566_UpdateModel.cs" />
-    <Compile Include="Migrations\202505201624566_UpdateModel.Designer.cs">
-      <DependentUpon>202505201624566_UpdateModel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Produs.cs" />
@@ -87,9 +83,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505151833434_AddRoleToUtilizator.resx">
       <DependentUpon>202505151833434_AddRoleToUtilizator.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505201624566_UpdateModel.resx">
-      <DependentUpon>202505201624566_UpdateModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

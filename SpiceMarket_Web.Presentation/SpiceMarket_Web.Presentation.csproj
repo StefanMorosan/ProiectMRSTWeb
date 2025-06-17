@@ -127,7 +127,6 @@
     <Content Include="Content\Images\turmeric.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
-    <Content Include="Views\Home\script.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
