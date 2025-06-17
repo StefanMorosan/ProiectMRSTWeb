@@ -22,34 +22,6 @@
                                     width:  @(produs.ImageWidth)px;
                                     object-fit: cover;" />
                     </div>
-                    <h5 class="card-title">
-                        @produs.Nume
-                        <small class="text-muted">(@produs.Pret MDL/kg)</small>
-                    </h5>
-
-                    <p><strong>Ingrediente:</strong> @produs.Ingrediente</p>
-                    <p><strong>Origine:</strong> @produs.TaraOrigine</p>
-
-                    <!-- Rating vizual cu stele -->
-                    <p>
-                        <strong>Rating:</strong>
-                        @{
-                            var rating = Math.Round(produs.Rating);
-                            for (int i = 1; i <= 5; i++)
-                            {
-                                if (i <= rating)
-                                {
-                                    <span style="color: gold;">★</span>
-                                }
-                                else
-                                {
-                                    <span style="color: lightgray;">☆</span>
-                                }
-                            }
-                        }
-                    </p>
-
-
                     <div class="product-text-area">
                         <h5 class="card-title">
                             @produs.Nume
@@ -74,15 +46,6 @@
                             </button>
                         }
                     </div>
-                    @if (!string.IsNullOrEmpty(user))
-                    {
-                        <a href="@Url.Action("AdaugaLaWishlist", "Wishlist", new { produs = produs.Nume })"
-                           class="btn btn-outline-danger mt-2">
-                            ❤️ Adaugă la Wishlist
-                        </a>
-
-                    }
-
                 </div>
             </div>
         }

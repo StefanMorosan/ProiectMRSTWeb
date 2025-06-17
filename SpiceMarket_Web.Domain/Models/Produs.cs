@@ -9,11 +9,6 @@ namespace SpiceMarket_Web.Domain.Models
         public string CaleImagine { get; set; }
         public int ImageHeight { get; set; }
         public int ImageWidth { get; set; }
-        public string Ingrediente { get; set; }
-        public string TaraOrigine { get; set; }
-        public double Rating { get; set; } 
-
-
     }
-
+    
 }
