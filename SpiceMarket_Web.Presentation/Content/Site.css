@@ -1,20 +1,19 @@
-﻿/* Stiluri pentru bara de navigare */
+﻿
 .navbar-default {
-    background-color: #ff4500; /* Roșu-portocaliu */
+    background-color: #ff4500; 
     border-color: #ff4500;
 }
 
     .navbar-default .navbar-brand,
     .navbar-default .navbar-nav > li > a {
-        color: #fff; /* Text alb pentru contrast */
+        color: #fff; 
     }
 
         .navbar-default .navbar-brand:hover,
         .navbar-default .navbar-nav > li > a:hover {
-            color: #ddd; /* O nuanță mai deschisă la hover */
+            color: #ddd; 
         }
 
-/* Produsele */
 .card {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
@@ -24,42 +23,40 @@
     color: #333;
 }
 
-/* General tweaks */
 body {
-    padding-top: 70px; /* Spațiu pentru bara de navigare fixă */
+    padding-top: 70px; 
     font-family: Arial, sans-serif;
 }
 
-/* Main container as a flexbox */
 .main-container {
     display: flex;
-    min-height: 100vh; /* Full height of the viewport */
-    flex-direction: row; /* Ensure items are laid out horizontally */
+    min-height: 100vh; 
+    flex-direction: row; 
 }
 
-/* Sidebar  */
+
 .sidebar {
-    width: 200px; /* Fixed width, adjust as you like */
-    background-color: #f8f9fa; /* Light gray for a clean look */
+    width: 200px; 
+    background-color: #f8f9fa; 
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Fancy shadow effect */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
 }
 
 .left-sidebar {
-    order: 1; /* Stays on the left */
+    order: 1; 
 }
 
 .content-container {
-    order: 2; /* Stays in the center */
-    flex-grow: 1; /* Takes up the remaining space */
+    order: 2; 
+    flex-grow: 1; 
     padding: 20px;
 }
 
 .right-sidebar {
-    order: 3; /* Stays on the right */
+    order: 3; 
 }
 
-/* Make the sidebar text look good */
+
 .sidebar h3 {
     font-size: 1.5em;
     color: #333;
@@ -71,7 +68,7 @@ body {
     color: #666;
 }
 
-/* Responsive tweak: hide sidebars on small screens */
+
 @media (max-width: 768px) {
     .sidebar {
         display: none;
@@ -81,13 +78,13 @@ body {
         width: 100%;
     }
 }
-/* Total Price Section */
+
 .total-price-section {
     margin-top: 20px;
     padding: 15px;
-    background-color: #f8f9fa; /* Light gray background */
+    background-color: #f8f9fa; 
     border-radius: 5px;
-    text-align: right; /* Align the total to the right */
+    text-align: right; 
 }
 
     .total-price-section h3 {
@@ -103,39 +100,36 @@ body {
     overflow: hidden;
 }
 
-/* Fixed space for the image */
 .product-image-wrapper {
-    height: 200px; /* Fixed height for the image area - adjust as needed */
-    width: 100%; /* Full width of the card */
-    display: flex; /* Use flexbox to center the image */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    overflow: hidden; /* Hide overflow if image exceeds container */
+    height: 200px; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    overflow: hidden; 
 }
 
-/* Image inside the wrapper */
 .product-image {
-    object-fit: cover; /* Maintain aspect ratio and fill the space */
+    object-fit: cover; 
 }
 
-/* Fixed space for the text and button */
+
 .product-text-area {
-    padding: 10px; /* Consistent padding */
-    text-align: center; /* Center the text and button */
-    min-height: 100px; /* Fixed minimum height for the text area - adjust as needed */
-    display: flex; /* Use flexbox to center content vertically */
-    flex-direction: column; /* Stack content vertically */
-    justify-content: center; /* Center content vertically */
+    padding: 10px; 
+    text-align: center; 
+    min-height: 100px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
 }
 
-/* Ensure cards are uniform */
+
 .card {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Ensure the card stretches to fit content */
+    height: 100%; 
 }
 
-/* Tighten the layout */
 .row {
     margin-bottom: 5px;
 }
@@ -150,16 +144,14 @@ body {
 
 
 
-
-/* Card body */
 .card-body {
-    padding: 10px; /* Ensure minimal padding */
-    margin: 0; /* Remove any extra margins */
+    padding: 10px; 
+    margin: 0; 
 }
 
 .sidebar ul {
-    padding-left: 20px; /* Adjusts the indentation of the bullet points */
-    margin: 0; /* Removes any default margins that might interfere */
+    padding-left: 20px; 
+    margin: 0; 
 }
 
 .sidebar h3, .sidebar p {

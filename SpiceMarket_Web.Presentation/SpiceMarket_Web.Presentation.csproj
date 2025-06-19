@@ -126,7 +126,6 @@
     <Content Include="Content\Images\scortisoara.png" />
     <Content Include="Content\Images\turmeric.png" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\Test.txt" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>

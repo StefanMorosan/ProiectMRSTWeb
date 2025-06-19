@@ -1,10 +1,12 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web;
 using SpiceMarket_Web.BusinessLogic.Interfaces;
 using SpiceMarket_Web.BusinessLogic.Services;
 using SpiceMarket_Web.Domain.Models;
-using SpiceMarket_Web.Presentation.Filters; // Import custom filters
+using SpiceMarket_Web.Presentation.Filters;
+using System;
 
 namespace SpiceMarket_Web.Controllers
 {
@@ -41,8 +43,15 @@ namespace SpiceMarket_Web.Controllers
 
                 if (user != null)
                 {
-                    Session["Utilizator"] = user.NumeUtilizator;
-                    Session["Rol"] = user.Rol;
+                    // Set cookies for user session
+                    HttpCookie usernameCookie = new HttpCookie("username", user.NumeUtilizator);
+                    usernameCookie.Expires = DateTime.Now.AddDays(7);
+                    Response.Cookies.Add(usernameCookie);
+
+                    HttpCookie roleCookie = new HttpCookie("role", user.Rol);
+                    roleCookie.Expires = DateTime.Now.AddDays(7);
+                    Response.Cookies.Add(roleCookie);
+
                     return RedirectToAction("Index");
                 }
             }
@@ -131,7 +140,17 @@ namespace SpiceMarket_Web.Controllers
 
         public ActionResult Deconectare()
         {
+            // Clear session and cookies
             Session.Clear();
+
+            HttpCookie usernameCookie = new HttpCookie("username");
+            usernameCookie.Expires = DateTime.Now.AddDays(-1); // Expire the cookie
+            Response.Cookies.Add(usernameCookie);
+
+            HttpCookie roleCookie = new HttpCookie("role");
+            roleCookie.Expires = DateTime.Now.AddDays(-1); // Expire the cookie
+            Response.Cookies.Add(roleCookie);
+
             return RedirectToAction("Index");
         }
     }

@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Acasă";
     // get current user (null or empty if guest)
-    var user = Session["Utilizator"] as string;
+    var user = Request.Cookies["username"] != null ? Request.Cookies["username"].Value : null;
 }
 
 <div class="container">
@@ -16,9 +16,7 @@
                         <img src="@Url.Content(produs.CaleImagine)"
                              alt="@produs.Nume"
                              class="product-image"
-                             style="height: @(produs.ImageHeight)px;
-                                    width:  @(produs.ImageWidth)px;
-                                    object-fit: cover;" />
+                             style="height: @(produs.ImageHeight + "px"); width: @(produs.ImageWidth + "px"); object-fit: cover;" />
                     </div>
                     <div class="product-text-area">
                         <h5 class="card-title">
