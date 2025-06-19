@@ -21,9 +21,19 @@ namespace SpiceMarket_Web.Controllers
             _cartService = cartService;
         }
 
-        public ActionResult Index()
+        // Home page with optional search query
+        public ActionResult Index(string searchQuery)
         {
             var products = _productRepository.GetAllProducts();
+
+            // Filter products based on search query
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                products = products
+                    .Where(p => p.Nume.ToLower().Contains(searchQuery.ToLower()))
+                    .ToList();
+            }
+
             return View(products);
         }
 
@@ -59,7 +69,26 @@ namespace SpiceMarket_Web.Controllers
             ViewBag.MesajEroare = "Nume utilizator sau parolă incorecte.";
             return View();
         }
+        [HttpGet]
+        public JsonResult LiveSearch(string searchQuery)
+        {
+            var products = _productRepository.GetAllProducts();
 
+            // Filter products based on search query
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                products = products
+                    .Where(p => p.Nume.ToLower().Contains(searchQuery.ToLower()))
+                    .ToList();
+            }
+
+            return Json(products.Select(p => new
+            {
+                Nume = p.Nume,
+                Pret = p.Pret,
+                CaleImagine = Url.Content(p.CaleImagine)
+            }), JsonRequestBehavior.AllowGet);
+        }
         [HttpGet]
         public ActionResult Inregistrare()
         {

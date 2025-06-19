@@ -1,13 +1,23 @@
 ﻿@model List<SpiceMarket_Web.Domain.Models.Produs>
 @{
     ViewBag.Title = "Acasă";
-    // get current user (null or empty if guest)
+    // Get current user (null or empty if guest)
     var user = Request.Cookies["username"] != null ? Request.Cookies["username"].Value : null;
 }
 
 <div class="container">
     <h3>Produse disponibile:</h3>
-    <div class="row">
+
+    <!-- Search Bar -->
+    <input type="text" id="searchBar" class="form-control" placeholder="Caută produse..." onkeyup="performSearch()" />
+
+    <!-- Go Back Button -->
+    <div class="mt-2">
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Înapoi</a>
+    </div>
+
+    <!-- Product List -->
+    <div id="productList" class="row mt-3">
         @foreach (var produs in Model)
         {
             <div class="col-md-4">
@@ -46,3 +56,35 @@
         }
     </div>
 </div>
+
+<script>function performSearch() {
+        const searchQuery = document.getElementById("searchBar").value;
+
+        fetch(`/Home/LiveSearch?searchQuery=${searchQuery}`)
+            .then((response) => response.json())
+            .then((data) => {
+                const productList = document.getElementById("productList");
+                productList.innerHTML = ""; // Clear the current product list
+
+                data.forEach((produs) => {
+                    const productCard = `
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <div class="product-image-wrapper">
+                                    <img src="${produs.CaleImagine}" alt="${produs.Nume}" class="product-image" style="height: 200px; width: 200px; object-fit: cover;" />
+                                </div>
+                                <div class="product-text-area">
+                                    <h5 class="card-title">
+                                        ${produs.Nume}
+                                        <small class="text-muted">(${produs.Pret} MDL/kg)</small>
+                                    </h5>
+                                    <a href="/Home/AdaugaInCos?produs=${produs.Nume}" class="btn btn-success">Adaugă în coș</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    productList.innerHTML += productCard;
+                });
+            })
+            .catch((error) => console.error("Error:", error));
+    }</script>
