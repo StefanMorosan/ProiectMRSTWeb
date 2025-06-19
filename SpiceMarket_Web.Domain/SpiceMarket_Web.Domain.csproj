@@ -66,6 +66,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Produs.cs" />
+    <Compile Include="Models\RoleConstants.cs" />
     <Compile Include="Models\SpiceMarketContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Utilizator.cs" />

@@ -95,6 +95,7 @@ body {
         font-size: 1.5em;
         color: #333;
     }
+
 .product-image-container {
     display: flex;
     justify-content: center;
@@ -160,6 +161,7 @@ body {
     padding-left: 20px; /* Adjusts the indentation of the bullet points */
     margin: 0; /* Removes any default margins that might interfere */
 }
+
 .sidebar h3, .sidebar p {
     margin-left: 0;
 }

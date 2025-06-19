@@ -1,22 +1,21 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 using SpiceMarket_Web.Domain.Models;
-using SpiceMarket_Web.Presentation.Filters; // your AdminModAttribute
+using SpiceMarket_Web.Presentation.Filters;
 
 namespace SpiceMarket_Web.Controllers
 {
-    [AdminMod] // entire controller locked to Admins
+    [AdminMod(Roles = "admin,manager")] // Allow Admin and Manager roles
     public class AdminController : Controller
     {
-        // GET: /Admin/Dashboard
         public ActionResult Dashboard()
         {
             using (var db = new SpiceMarketContext())
             {
                 var totalProducts = db.Produse.Count();
                 var totalUsers = db.Utilizatori.Count();
-                // For sales, if you had an Orders table you would sum that
-                var totalSales = 0;
+                var totalSales = 0; // Placeholder
                 ViewBag.TotalProducts = totalProducts;
                 ViewBag.TotalUsers = totalUsers;
                 ViewBag.TotalSales = totalSales;
@@ -24,7 +23,6 @@ namespace SpiceMarket_Web.Controllers
             return View();
         }
 
-        // GET: /Admin/Products
         public ActionResult Products()
         {
             using (var db = new SpiceMarketContext())
@@ -34,12 +32,11 @@ namespace SpiceMarket_Web.Controllers
             }
         }
 
-        // GET: /Admin/CreateProduct
         public ActionResult CreateProduct()
         {
             return View();
         }
-        // POST: /Admin/CreateProduct
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateProduct(Produs model)
@@ -53,7 +50,6 @@ namespace SpiceMarket_Web.Controllers
             return RedirectToAction("Products");
         }
 
-        // GET: /Admin/EditProduct/5
         public ActionResult EditProduct(int id)
         {
             using (var db = new SpiceMarketContext())
@@ -63,6 +59,7 @@ namespace SpiceMarket_Web.Controllers
                 return View(produs);
             }
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditProduct(Produs model)
@@ -76,7 +73,6 @@ namespace SpiceMarket_Web.Controllers
             return RedirectToAction("Products");
         }
 
-        // GET: /Admin/DeleteProduct/5
         public ActionResult DeleteProduct(int id)
         {
             using (var db = new SpiceMarketContext())
@@ -86,6 +82,7 @@ namespace SpiceMarket_Web.Controllers
                 return View(produs);
             }
         }
+
         [HttpPost, ActionName("DeleteProduct")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteProductConfirmed(int id)
@@ -99,7 +96,6 @@ namespace SpiceMarket_Web.Controllers
             return RedirectToAction("Products");
         }
 
-        // GET: /Admin/Users
         public ActionResult Users()
         {
             using (var db = new SpiceMarketContext())
@@ -109,7 +105,7 @@ namespace SpiceMarket_Web.Controllers
             }
         }
 
-        // GET: /Admin/ToggleRole/5
+        [AdminMod(Roles = "admin")] // Restrict ToggleRole to Admin only
         public ActionResult ToggleRole(int id)
         {
             using (var db = new SpiceMarketContext())
@@ -122,10 +118,8 @@ namespace SpiceMarket_Web.Controllers
             return RedirectToAction("Users");
         }
 
-        // GET: /Admin/Reports
         public ActionResult Reports()
         {
-            // stub: in real life you'd query Orders
             ViewBag.Message = "Aici vor apărea rapoartele de vânzări.";
             return View();
         }

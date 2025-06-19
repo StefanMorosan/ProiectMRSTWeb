@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 using SpiceMarket_Web.BusinessLogic.Interfaces;
 using SpiceMarket_Web.BusinessLogic.Services;
 using SpiceMarket_Web.Domain.Models;
@@ -41,7 +42,7 @@ namespace SpiceMarket_Web.Controllers
                 if (user != null)
                 {
                     Session["Utilizator"] = user.NumeUtilizator;
-                    Session["Rol"] = user.Rol; 
+                    Session["Rol"] = user.Rol;
                     return RedirectToAction("Index");
                 }
             }
@@ -122,10 +123,10 @@ namespace SpiceMarket_Web.Controllers
             return View();
         }
 
-        [AdminMod]
+        [AdminMod(Roles = "admin")] // Restrict to Admin only
         public ActionResult SecretReport()
         {
-            return View(); // Accesibil doar adminului
+            return View();
         }
 
         public ActionResult Deconectare()
