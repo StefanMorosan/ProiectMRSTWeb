@@ -46,6 +46,16 @@
         </div>
     }
 
+    @* Display logged-in user info dynamically *@
+    @if (Request.Cookies["username"] != null)
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <p class="alert alert-info">Bun venit, @Request.Cookies["username"].Value!</p>
+            </div>
+        </div>
+    }
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-6">
             @Html.ActionLink(

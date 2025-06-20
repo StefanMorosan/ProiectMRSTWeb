@@ -6,6 +6,13 @@
 
 <h2>Înregistrare cont nou</h2>
 
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
 @using (Html.BeginForm("Inregistrare", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.AntiForgeryToken()
@@ -13,7 +20,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.NumeUtilizator, new { @class = "control-label col-md-2" })
         <div class="col-md-6">
-            @Html.TextBoxFor(m => m.NumeUtilizator, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.NumeUtilizator, new { @class = "form-control", required = "required" })
             @Html.ValidationMessageFor(m => m.NumeUtilizator)
         </div>
     </div>
@@ -21,7 +28,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Parola, new { @class = "control-label col-md-2" })
         <div class="col-md-6">
-            @Html.PasswordFor(m => m.Parola, new { @class = "form-control" })
+            @Html.PasswordFor(m => m.Parola, new { @class = "form-control", required = "required" })
             @Html.ValidationMessageFor(m => m.Parola)
         </div>
     </div>
@@ -29,7 +36,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-2" })
         <div class="col-md-6">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", required = "required" })
             @Html.ValidationMessageFor(m => m.Email)
         </div>
     </div>
@@ -41,4 +48,3 @@
         </div>
     </div>
 }
-

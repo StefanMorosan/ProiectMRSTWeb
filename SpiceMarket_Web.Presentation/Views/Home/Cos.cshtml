@@ -1,7 +1,7 @@
-﻿@model List<SpiceMarket_Web.Domain.Models.CartItem>
+﻿﻿@model List<SpiceMarket_Web.Domain.Models.CartItem>
 @{
     ViewBag.Title = "Coșul meu";
-    var user = Request.Cookies["username"] != null ? Request.Cookies["username"].Value : null;
+    // Define the product list in the view to look up prices
     var produse = new List<SpiceMarket_Web.Domain.Models.Produs>
 {
         new SpiceMarket_Web.Domain.Models.Produs { Nume = "Scorțișoară", Pret = 80m },
@@ -13,6 +13,7 @@
         new SpiceMarket_Web.Domain.Models.Produs { Nume = "Turmeric", Pret = 70m }
     };
 
+    // Calculate the total price
     decimal totalPrice = 0m;
     if (Model != null && Model.Count > 0)
     {
@@ -66,6 +67,7 @@
 
         <div class="total-price-section">
             <h3>Total: @totalPrice MDL</h3>
+            <a href="@Url.Action("Checkout", "Home")" class="btn btn-success btn-lg">Continuă la checkout</a>
         </div>
     }
 </div>

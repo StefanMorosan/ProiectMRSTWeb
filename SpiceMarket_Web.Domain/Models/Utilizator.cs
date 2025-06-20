@@ -1,4 +1,7 @@
-﻿namespace SpiceMarket_Web.Domain.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SpiceMarket_Web.Domain.Models
 {
     public class Utilizator
     {

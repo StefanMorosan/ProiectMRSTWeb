@@ -63,9 +63,18 @@
     <Compile Include="Migrations\202505151833434_AddRoleToUtilizator.Designer.cs">
       <DependentUpon>202505151833434_AddRoleToUtilizator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506192047563_UpdateDatabaseSchema.cs" />
+    <Compile Include="Migrations\202506192047563_UpdateDatabaseSchema.Designer.cs">
+      <DependentUpon>202506192047563_UpdateDatabaseSchema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506192145309_SyncDatabase.cs" />
+    <Compile Include="Migrations\202506192145309_SyncDatabase.Designer.cs">
+      <DependentUpon>202506192145309_SyncDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Produs.cs" />
+    <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\RoleConstants.cs" />
     <Compile Include="Models\SpiceMarketContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +93,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505151833434_AddRoleToUtilizator.resx">
       <DependentUpon>202505151833434_AddRoleToUtilizator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506192047563_UpdateDatabaseSchema.resx">
+      <DependentUpon>202506192047563_UpdateDatabaseSchema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506192145309_SyncDatabase.resx">
+      <DependentUpon>202506192145309_SyncDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

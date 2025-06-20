@@ -15,14 +15,14 @@ namespace SpiceMarket_Web.Controllers
             using (var db = new SpiceMarketContext())
             {
                 var totalProducts = db.Produse.Count();
-                var totalUsers = db.Utilizatori.Count();
-                var totalSales = 0; // Placeholder
+                var totalUsers = db.Utilizators.Count();
+                var totalSales = db.Purchases.Sum(p => p.Cantitate); // Calculate total sales
                 ViewBag.TotalProducts = totalProducts;
                 ViewBag.TotalUsers = totalUsers;
                 ViewBag.TotalSales = totalSales;
             }
             return View();
-        }
+        }   
 
         public ActionResult Products()
         {
@@ -101,7 +101,7 @@ namespace SpiceMarket_Web.Controllers
         {
             using (var db = new SpiceMarketContext())
             {
-                var users = db.Utilizatori.ToList();
+                var users = db.Utilizators.ToList();
                 return View(users);
             }
         }
@@ -111,7 +111,7 @@ namespace SpiceMarket_Web.Controllers
         {
             using (var db = new SpiceMarketContext())
             {
-                var u = db.Utilizatori.Find(id);
+                var u = db.Utilizators.Find(id);
                 if (u == null) return HttpNotFound();
                 u.Rol = (u.Rol == "admin") ? "utilizator" : "admin";
                 db.SaveChanges();

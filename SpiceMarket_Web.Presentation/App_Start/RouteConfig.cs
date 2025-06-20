@@ -7,8 +7,6 @@ public class RouteConfig
     {
         routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-        routes.IgnoreRoute("{*staticfile}", new { staticfile = @".*\.(css|js|png|jpg|jpeg|gif|svg|ttf|woff|woff2|eot|txt)(/.*)?" });
-
         routes.MapRoute(
             name: "Default",
             url: "{controller}/{action}/{id}",

@@ -48,7 +48,8 @@ namespace SpiceMarket_Web.Controllers
         {
             using (var db = new SpiceMarketContext())
             {
-                var user = db.Utilizatori
+                // Fix authentication logic to correctly query Utilizators
+                var user = db.Utilizators
                     .FirstOrDefault(u => u.NumeUtilizator == numeUtilizator && u.Parola == parola);
 
                 if (user != null)
@@ -58,17 +59,24 @@ namespace SpiceMarket_Web.Controllers
                     usernameCookie.Expires = DateTime.Now.AddDays(7);
                     Response.Cookies.Add(usernameCookie);
 
-                    HttpCookie roleCookie = new HttpCookie("role", user.Rol);
+                    HttpCookie roleCookie = new HttpCookie("role", user.Rol ?? "utilizator");
                     roleCookie.Expires = DateTime.Now.AddDays(7);
                     Response.Cookies.Add(roleCookie);
 
+                    // Restore session for authenticated user
+                    Session["Utilizator"] = user.NumeUtilizator;
+
+                    TempData["Success"] = "Autentificare reușită!";
                     return RedirectToAction("Index");
                 }
+                else
+                {
+                    ViewBag.MesajEroare = "Nume utilizator sau parolă incorecte.";
+                    return View();
+                }
             }
-
-            ViewBag.MesajEroare = "Nume utilizator sau parolă incorecte.";
-            return View();
         }
+
         [HttpGet]
         public JsonResult LiveSearch(string searchQuery)
         {
@@ -89,6 +97,7 @@ namespace SpiceMarket_Web.Controllers
                 CaleImagine = Url.Content(p.CaleImagine)
             }), JsonRequestBehavior.AllowGet);
         }
+
         [HttpGet]
         public ActionResult Inregistrare()
         {
@@ -104,14 +113,17 @@ namespace SpiceMarket_Web.Controllers
 
             using (var db = new SpiceMarketContext())
             {
-                if (db.Utilizatori.Any(u => u.NumeUtilizator == model.NumeUtilizator))
+                if (db.Utilizators.Any(u => u.NumeUtilizator == model.NumeUtilizator))
                 {
                     ModelState.AddModelError("NumeUtilizator", "Acest nume de utilizator este deja folosit.");
                     return View(model);
                 }
 
-                model.Rol = "utilizator"; // Utilizator normal
-                db.Utilizatori.Add(model);
+                // Set default role if not provided
+                model.Rol = model.Rol ?? "utilizator";
+
+                // Save user data to the database
+                db.Utilizators.Add(model);
                 db.SaveChanges();
             }
 
@@ -132,10 +144,19 @@ namespace SpiceMarket_Web.Controllers
         {
             try
             {
+                var username = Session["Utilizator"] as string;
+
+                // Ensure user is authenticated before adding to cart
+                if (string.IsNullOrEmpty(username))
+                {
+                    TempData["Error"] = "Autentificare necesară.";
+                    return RedirectToAction("Autentificare");
+                }
+
                 _cartService.AddToCart(produs, 1);
                 return RedirectToAction("Index");
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 TempData["Error"] = ex.Message;
                 return RedirectToAction("Index");
@@ -171,16 +192,76 @@ namespace SpiceMarket_Web.Controllers
         {
             // Clear session and cookies
             Session.Clear();
+            Session.Abandon();
 
-            HttpCookie usernameCookie = new HttpCookie("username");
-            usernameCookie.Expires = DateTime.Now.AddDays(-1); // Expire the cookie
-            Response.Cookies.Add(usernameCookie);
+            // Clear all cookies
+            if (Request.Cookies != null)
+            {
+                foreach (var key in Request.Cookies.AllKeys)
+                {
+                    var cookie = new HttpCookie(key);
+                    cookie.Expires = DateTime.Now.AddDays(-1); // Expire the cookie
+                    Response.Cookies.Add(cookie);
+                }
+            }
 
-            HttpCookie roleCookie = new HttpCookie("role");
-            roleCookie.Expires = DateTime.Now.AddDays(-1); // Expire the cookie
-            Response.Cookies.Add(roleCookie);
-
+            TempData["Success"] = "Te-ai deconectat cu succes!";
             return RedirectToAction("Index");
+        }
+
+        [UserMod]
+        public ActionResult Checkout()
+        {
+            // Load items from the cart
+            var cartItems = _cartService.GetCartItems();
+
+            if (cartItems == null || !cartItems.Any())
+            {
+                TempData["Error"] = "Coșul tău este gol. Adaugă produse înainte de checkout.";
+                return RedirectToAction("Cos");
+            }
+
+            return View(cartItems); // Pass cart items to the checkout page
+        }
+
+        [HttpPost]
+        [UserMod]
+        [ValidateAntiForgeryToken]
+        public ActionResult PlaceOrder()
+        {
+            var cartItems = _cartService.GetCartItems();
+
+            if (cartItems == null || !cartItems.Any())
+            {
+                TempData["Error"] = "Coșul tău este gol. Adaugă produse înainte de checkout.";
+                return RedirectToAction("Cos");
+            }
+
+            using (var db = new SpiceMarketContext())
+            {
+                foreach (var item in cartItems)
+                {
+                    var produs = db.Produse.FirstOrDefault(p => p.Nume == item.Nume);
+
+                    if (produs != null)
+                    {
+                        var purchase = new Purchase
+                        {
+                            ProdusId = produs.Id, 
+                            CustomerId = 123, 
+                            Quantity = (int)item.Cantitate, 
+                            PurchaseDate = DateTime.Now
+                        };
+
+                        db.Purchases.Add(purchase);
+                    }
+                }
+
+                db.SaveChanges();
+            }
+
+            TempData["Success"] = "Comanda a fost plasată cu succes!";
+            return RedirectToAction("Cos");
         }
     }
 }
