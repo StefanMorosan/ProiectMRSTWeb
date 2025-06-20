@@ -24,7 +24,7 @@
                 <td>@u.Email</td>
                 <td>@u.Rol (@u.RoleLevel)</td>
                 <td>
-                    @if (Session["RoleLevel"] != null && (int)Session["RoleLevel"] == 1) // Current User is Manager
+                    @if (Session["RoleLevel"] != null && Session["RoleLevel"].ToString() == "manager") // Current User is Manager
                     {
                         if (u.RoleLevel == 3) // Regular User
                         {
@@ -39,7 +39,7 @@
                             <span class="text-muted">Fără acțiuni disponibile</span>
                         }
                     }
-                    else if (Session["RoleLevel"] != null && (int)Session["RoleLevel"] == 2 && u.RoleLevel != 1) // Current User is Admin
+                    else if (Session["RoleLevel"] != null && Session["RoleLevel"].ToString() == "admin" && u.RoleLevel != 1) // Current User is Admin
                     {
                         <a href="@Url.Action("ToggleRole", "Admin", new { id = u.Id })" class="btn btn-xs btn-warning">
                             @(u.Rol == "admin" ? "Revocă drepturi" : "Acordă admin")

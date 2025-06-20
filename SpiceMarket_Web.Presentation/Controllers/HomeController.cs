@@ -52,15 +52,25 @@ namespace SpiceMarket_Web.Controllers
 
                 if (user != null)
                 {
-                    HttpCookie usernameCookie = new HttpCookie("username", user.NumeUtilizator);
-                    usernameCookie.Expires = DateTime.Now.AddDays(7);
+                    // Clear existing cookies
+                    ClearCookies();
+
+                    // Add new cookies
+                    HttpCookie usernameCookie = new HttpCookie("username", user.NumeUtilizator)
+                    {
+                        Expires = DateTime.Now.AddDays(7)
+                    };
                     Response.Cookies.Add(usernameCookie);
 
-                    HttpCookie roleCookie = new HttpCookie("role", user.Rol ?? "utilizator");
-                    roleCookie.Expires = DateTime.Now.AddDays(7);
+                    HttpCookie roleCookie = new HttpCookie("role", user.Rol ?? "utilizator")
+                    {
+                        Expires = DateTime.Now.AddDays(7)
+                    };
                     Response.Cookies.Add(roleCookie);
 
+                    // Set session variables
                     Session["Utilizator"] = user.NumeUtilizator;
+                    Session["RoleLevel"] = user.Rol; // Ensure session role is set correctly
 
                     TempData["Success"] = "Autentificare reușită!";
                     return RedirectToAction("Index");
@@ -71,6 +81,19 @@ namespace SpiceMarket_Web.Controllers
                     return View();
                 }
             }
+        }
+
+        public ActionResult Deconectare()
+        {
+            // Clear session
+            Session.Clear();
+            Session.Abandon();
+
+            // Clear cookies
+            ClearCookies();
+
+            TempData["Success"] = "Te-ai deconectat cu succes!";
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -196,25 +219,6 @@ namespace SpiceMarket_Web.Controllers
             return View();
         }
 
-        public ActionResult Deconectare()
-        {
-            Session.Clear();
-            Session.Abandon();
-
-            if (Request.Cookies != null)
-            {
-                foreach (var key in Request.Cookies.AllKeys)
-                {
-                    var cookie = new HttpCookie(key);
-                    cookie.Expires = DateTime.Now.AddDays(-1);
-                    Response.Cookies.Add(cookie);
-                }
-            }
-
-            TempData["Success"] = "Te-ai deconectat cu succes!";
-            return RedirectToAction("Index");
-        }
-
         [UserMod]
         public ActionResult Checkout()
         {
@@ -286,23 +290,14 @@ namespace SpiceMarket_Web.Controllers
                             PurchaseDate = DateTime.Now
                         };
 
-                        // Ensure all fields are populated before adding to the database
-                        if (purchase.ProdusId != null && !string.IsNullOrEmpty(purchase.ProductName) &&
-                            purchase.CustomerId != null && purchase.Quantity > 0)
-                        {
-                            db.Purchases.Add(purchase);
-                        }
-                        else
-                        {
-                            TempData["Error"] = $"Date incomplete pentru produsul '{item.Nume}'.";
-                        }
+                        db.Purchases.Add(purchase);
                     }
 
                     db.SaveChanges();
                 }
 
                 TempData["Success"] = "Comanda a fost plasată cu succes!";
-                return RedirectToAction("Index"); // Redirect to Index after successful checkout
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -356,6 +351,21 @@ namespace SpiceMarket_Web.Controllers
             {
                 var produse = db.Produse.ToList();
                 return View(produse);
+            }
+        }
+
+        private void ClearCookies()
+        {
+            if (Request.Cookies != null)
+            {
+                foreach (var key in Request.Cookies.AllKeys)
+                {
+                    var cookie = new HttpCookie(key)
+                    {
+                        Expires = DateTime.Now.AddDays(-1)
+                    };
+                    Response.Cookies.Add(cookie);
+                }
             }
         }
     }

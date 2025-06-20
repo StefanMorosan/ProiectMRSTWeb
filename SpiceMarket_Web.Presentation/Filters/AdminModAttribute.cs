@@ -8,10 +8,11 @@ namespace SpiceMarket_Web.Presentation.Filters
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             // Fetch the user's role from the session
-            var userRole = httpContext.Session["Rol"]?.ToString();
+            var userRoleLevel = httpContext.Session["RoleLevel"]?.ToString();
+            System.Diagnostics.Debug.WriteLine($"AdminModAttribute - Session RoleLevel: {userRoleLevel}");
 
             // Allow access for Admin or Manager roles
-            return userRole == "admin" || userRole == "manager";
+            return userRoleLevel == "admin" || userRoleLevel == "manager";
         }
     }
 }

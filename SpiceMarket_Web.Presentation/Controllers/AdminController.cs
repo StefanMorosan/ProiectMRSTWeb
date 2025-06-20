@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using System.Web.Security;
 using SpiceMarket_Web.Domain.Models;
 using SpiceMarket_Web.Presentation.Filters;
 
@@ -11,6 +10,15 @@ namespace SpiceMarket_Web.Controllers
     {
         public ActionResult Dashboard()
         {
+            // Debugging logs for session state
+            var sessionRole = Session["RoleLevel"]?.ToString();
+            System.Diagnostics.Debug.WriteLine($"Session Role: {sessionRole}");
+
+            if (string.IsNullOrEmpty(sessionRole))
+            {
+                return new HttpUnauthorizedResult("Session Role is missing or invalid.");
+            }
+
             using (var db = new SpiceMarketContext())
             {
                 var totalProducts = db.Produse.Count();
@@ -103,55 +111,6 @@ namespace SpiceMarket_Web.Controllers
                 var users = db.Utilizators.ToList();
                 return View(users);
             }
-        }
-
-        [AdminMod(Roles = "manager")] // Restrict PromoteToAdmin to Manager only
-        public ActionResult PromoteToAdmin(int userId)
-        {
-            using (var db = new SpiceMarketContext())
-            {
-                var user = db.Utilizators.Find(userId);
-                if (user == null) return HttpNotFound();
-
-                if (user.RoleLevel == 3) // Regular User
-                {
-                    user.RoleLevel = 2; // Promote to Admin
-                    user.Rol = "admin";
-                    db.SaveChanges();
-                }
-            }
-            return RedirectToAction("Users");
-        }
-
-        [AdminMod(Roles = "manager")] // Restrict DemoteFromAdmin to Manager only
-        public ActionResult DemoteFromAdmin(int userId)
-        {
-            using (var db = new SpiceMarketContext())
-            {
-                var user = db.Utilizators.Find(userId);
-                if (user == null) return HttpNotFound();
-
-                if (user.RoleLevel == 2) // Admin
-                {
-                    user.RoleLevel = 3; // Demote to Regular User
-                    user.Rol = "utilizator";
-                    db.SaveChanges();
-                }
-            }
-            return RedirectToAction("Users");
-        }
-
-        [AdminMod(Roles = "admin")] // Restrict ToggleRole to Admin only
-        public ActionResult ToggleRole(int id)
-        {
-            using (var db = new SpiceMarketContext())
-            {
-                var u = db.Utilizators.Find(id);
-                if (u == null) return HttpNotFound();
-                u.Rol = (u.Rol == "admin") ? "utilizator" : "admin";
-                db.SaveChanges();
-            }
-            return RedirectToAction("Users");
         }
 
         public ActionResult Reports()
