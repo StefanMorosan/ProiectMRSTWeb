@@ -115,8 +115,34 @@ namespace SpiceMarket_Web.Controllers
 
         public ActionResult Reports()
         {
-            ViewBag.Message = "Aici vor apărea rapoartele de vânzări.";
+            using (var db = new SpiceMarketContext())
+            {
+                // Fetch detailed reports data
+                var purchaseReports = db.Purchases
+                    .OrderByDescending(p => p.PurchaseDate)
+                    .Select(p => new PurchaseReportModel
+                    {
+                        ProductName = p.ProductName,
+                        Username = p.Username,
+                        Quantity = p.Quantity,
+                        TotalPrice = p.TotalPrice,
+                        PurchaseDate = p.PurchaseDate
+                    })
+                    .ToList();
+
+                ViewBag.PurchaseReports = purchaseReports;
+            }
+
             return View();
         }
+    }
+
+    public class PurchaseReportModel
+    {
+        public string ProductName { get; set; }
+        public string Username { get; set; }
+        public int Quantity { get; set; }
+        public decimal TotalPrice { get; set; }
+        public System.DateTime PurchaseDate { get; set; }
     }
 }

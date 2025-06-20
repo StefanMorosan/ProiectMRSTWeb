@@ -1,5 +1,40 @@
-﻿@{
-    ViewBag.Title = "Rapoarte Vânzări";
+﻿@model IEnumerable<SpiceMarket_Web.Controllers.PurchaseReportModel>
+
+@{
+    ViewBag.Title = "Rapoarte de Vânzări";
 }
-<h2>Rapoarte Vânzări</h2>
-<p>@ViewBag.Message</p>
+
+<h2>Rapoarte de Vânzări</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Produs</th>
+            <th>Utilizator</th>
+            <th>Cantitate</th>
+            <th>Preț Total</th>
+            <th>Data Achiziției</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var report in Model)
+            {
+                <tr>
+                    <td>@report.ProductName</td>
+                    <td>@report.Username</td>
+                    <td>@report.Quantity</td>
+                    <td>@report.TotalPrice</td>
+                    <td>@report.PurchaseDate.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">Nu există rapoarte disponibile.</td>
+            </tr>
+        }
+    </tbody>
+</table>

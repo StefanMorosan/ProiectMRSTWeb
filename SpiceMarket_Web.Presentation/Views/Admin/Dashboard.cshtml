@@ -28,3 +28,12 @@
     <li>@Html.ActionLink("Gestionare utilizatori", "Users", "Admin", null, new { @class = "btn btn-default" })</li>
     <li>@Html.ActionLink("Rapoarte vânzări", "Reports", "Admin", null, new { @class = "btn btn-default" })</li>
 </ul>
+
+<!-- Added Reports Section -->
+<div class="row mt-5">
+    <div class="col-md-12">
+        <h3>Rapoarte detaliate</h3>
+        <p>Vizualizați rapoarte detaliate despre vânzări și activitatea utilizatorilor.</p>
+        <a href="@Url.Action("Reports", "Admin")" class="btn btn-warning">Vizualizați rapoartele</a>
+    </div>
+</div>
