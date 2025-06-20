@@ -1,15 +1,17 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using SpiceMarket_Web.Domain.Models;
 
-public class AdminModAttribute : AuthorizeAttribute
+namespace SpiceMarket_Web.Presentation.Filters
 {
-    protected override bool AuthorizeCore(HttpContextBase httpContext)
+    public class AdminModAttribute : AuthorizeAttribute
     {
-        // Fetch the user's role from the session
-        var userRole = httpContext.Session["Rol"]?.ToString();
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        {
+            // Fetch the user's role from the session
+            var userRole = httpContext.Session["Rol"]?.ToString();
 
-        // Allow access for Admin or Manager roles
-        return userRole == RoleConstants.Admin || userRole == RoleConstants.Manager;
+            // Allow access for Admin or Manager roles
+            return userRole == "admin" || userRole == "manager";
+        }
     }
 }

@@ -1,23 +1,52 @@
 ﻿@model List<SpiceMarket_Web.Domain.Models.Utilizator>
+@using SpiceMarket_Web.Domain.Models
+
 @{
     ViewBag.Title = "Gestionare Utilizatori";
 }
-<h2>Utilizatori</h2>
+
+<h2>Gestionare Utilizatori</h2>
+
 <table class="table">
-    <tr><th>Username</th><th>Email</th><th>Rol</th><th>Acțiune</th></tr>
-    @foreach (var u in Model)
-    {
+    <thead>
         <tr>
-            <td>@u.NumeUtilizator</td>
-            <td>@u.Email</td>
-            <td>@u.Rol</td>
-            <td>
-                @Html.ActionLink(
-                    u.Rol == "admin" ? "Revocă drepturi" : "Acordă admin",
-                    "ToggleRole",
-                    new { id = u.Id },
-                    new { @class = "btn btn-xs btn-warning" })
-            </td>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Acțiuni</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.NumeUtilizator</td>
+                <td>@u.Email</td>
+                <td>@u.Rol (@u.RoleLevel)</td>
+                <td>
+                    @if (Session["RoleLevel"] != null && (int)Session["RoleLevel"] == 1) // Current User is Manager
+                    {
+                        if (u.RoleLevel == 3) // Regular User
+                        {
+                            <a href="@Url.Action("PromoteToAdmin", "Admin", new { userId = u.Id })" class="btn btn-xs btn-primary">Promovează la Admin</a>
+                        }
+                        else if (u.RoleLevel == 2) // Admin
+                        {
+                            <a href="@Url.Action("DemoteFromAdmin", "Admin", new { userId = u.Id })" class="btn btn-xs btn-danger">Revocă drepturi de Admin</a>
+                        }
+                        else if (u.RoleLevel == 1) // Manager
+                        {
+                            <span class="text-muted">Fără acțiuni disponibile</span>
+                        }
+                    }
+                    else if (Session["RoleLevel"] != null && (int)Session["RoleLevel"] == 2 && u.RoleLevel != 1) // Current User is Admin
+                    {
+                        <a href="@Url.Action("ToggleRole", "Admin", new { id = u.Id })" class="btn btn-xs btn-warning">
+                            @(u.Rol == "admin" ? "Revocă drepturi" : "Acordă admin")
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

@@ -79,6 +79,10 @@
     <Compile Include="Migrations\202506200619018_UpdatePurchaseModel1.Designer.cs">
       <DependentUpon>202506200619018_UpdatePurchaseModel1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506200909583_UpdateDatabaseSchema1.cs" />
+    <Compile Include="Migrations\202506200909583_UpdateDatabaseSchema1.Designer.cs">
+      <DependentUpon>202506200909583_UpdateDatabaseSchema1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Produs.cs" />
@@ -114,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202506200619018_UpdatePurchaseModel1.resx">
       <DependentUpon>202506200619018_UpdatePurchaseModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506200909583_UpdateDatabaseSchema1.resx">
+      <DependentUpon>202506200909583_UpdateDatabaseSchema1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SpiceMarket_Web.Domain.Models
 {
@@ -8,7 +7,12 @@ namespace SpiceMarket_Web.Domain.Models
         public int Id { get; set; }
         public string NumeUtilizator { get; set; }
         public string Parola { get; set; }
+
+        [Required]
         public string Email { get; set; }
+
         public string Rol { get; set; }
+
+        public int RoleLevel { get; set; }
     }
 }

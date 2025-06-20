@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using System.Web;
 using SpiceMarket_Web.Domain.Models;
 using SpiceMarket_Web.Presentation.Filters;
 
@@ -22,7 +21,7 @@ namespace SpiceMarket_Web.Controllers
                 ViewBag.TotalSales = totalSales;
             }
             return View();
-        }   
+        }
 
         public ActionResult Products()
         {
@@ -104,6 +103,42 @@ namespace SpiceMarket_Web.Controllers
                 var users = db.Utilizators.ToList();
                 return View(users);
             }
+        }
+
+        [AdminMod(Roles = "manager")] // Restrict PromoteToAdmin to Manager only
+        public ActionResult PromoteToAdmin(int userId)
+        {
+            using (var db = new SpiceMarketContext())
+            {
+                var user = db.Utilizators.Find(userId);
+                if (user == null) return HttpNotFound();
+
+                if (user.RoleLevel == 3) // Regular User
+                {
+                    user.RoleLevel = 2; // Promote to Admin
+                    user.Rol = "admin";
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Users");
+        }
+
+        [AdminMod(Roles = "manager")] // Restrict DemoteFromAdmin to Manager only
+        public ActionResult DemoteFromAdmin(int userId)
+        {
+            using (var db = new SpiceMarketContext())
+            {
+                var user = db.Utilizators.Find(userId);
+                if (user == null) return HttpNotFound();
+
+                if (user.RoleLevel == 2) // Admin
+                {
+                    user.RoleLevel = 3; // Demote to Regular User
+                    user.Rol = "utilizator";
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Users");
         }
 
         [AdminMod(Roles = "admin")] // Restrict ToggleRole to Admin only
