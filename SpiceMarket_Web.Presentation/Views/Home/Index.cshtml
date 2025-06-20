@@ -1,4 +1,6 @@
-﻿@model List<SpiceMarket_Web.Domain.Models.Produs>
+﻿@model IEnumerable<SpiceMarket_Web.Domain.Models.Produs>
+@using SpiceMarket_Web.Domain.Models
+
 @{
     ViewBag.Title = "Acasă";
     // Get current user (null or empty if guest)
@@ -36,7 +38,7 @@
 
                         @if (!string.IsNullOrEmpty(user))
                         {
-                            <!-- Logged‑in user: real add‑to‑cart link -->
+                            <!-- Logged-in user: real add-to-cart link -->
                             <a href="@Url.Action("AdaugaInCos", "Home", new { produs = produs.Nume })"
                                class="btn btn-success">
                                 Adaugă în coș
@@ -57,7 +59,8 @@
     </div>
 </div>
 
-<script>function performSearch() {
+<script>
+    function performSearch() {
         const searchQuery = document.getElementById("searchBar").value;
 
         fetch(`/Home/LiveSearch?searchQuery=${searchQuery}`)
@@ -71,7 +74,7 @@
                         <div class="col-md-4">
                             <div class="card mb-3">
                                 <div class="product-image-wrapper">
-                                    <img src="${produs.CaleImagine}" alt="${produs.Nume}" class="product-image" style="height: 200px; width: 200px; object-fit: cover;" />
+                                    <img src="${produs.CaleImagine}" alt="${produs.Nume}" class="product-image" style="height: ${produs.ImageHeight}px; width: ${produs.ImageWidth}px; object-fit: cover;" />
                                 </div>
                                 <div class="product-text-area">
                                     <h5 class="card-title">
@@ -87,4 +90,5 @@
                 });
             })
             .catch((error) => console.error("Error:", error));
-    }</script>
+    }
+</script>

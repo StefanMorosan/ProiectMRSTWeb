@@ -71,10 +71,19 @@
     <Compile Include="Migrations\202506192145309_SyncDatabase.Designer.cs">
       <DependentUpon>202506192145309_SyncDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506200505100_UpdatePurchaseModel.cs" />
+    <Compile Include="Migrations\202506200505100_UpdatePurchaseModel.Designer.cs">
+      <DependentUpon>202506200505100_UpdatePurchaseModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506200619018_UpdatePurchaseModel1.cs" />
+    <Compile Include="Migrations\202506200619018_UpdatePurchaseModel1.Designer.cs">
+      <DependentUpon>202506200619018_UpdatePurchaseModel1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Produs.cs" />
     <Compile Include="Models\Purchase.cs" />
+    <Compile Include="Models\PurchaseViewModel.cs" />
     <Compile Include="Models\RoleConstants.cs" />
     <Compile Include="Models\SpiceMarketContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,6 +108,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202506192145309_SyncDatabase.resx">
       <DependentUpon>202506192145309_SyncDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506200505100_UpdatePurchaseModel.resx">
+      <DependentUpon>202506200505100_UpdatePurchaseModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506200619018_UpdatePurchaseModel1.resx">
+      <DependentUpon>202506200619018_UpdatePurchaseModel1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

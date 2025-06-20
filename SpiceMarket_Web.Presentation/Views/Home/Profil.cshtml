@@ -1,6 +1,36 @@
-﻿@{
-    ViewBag.Title = "Profilul meu";
-}
+﻿@model IEnumerable<SpiceMarket_Web.ViewModels.PurchaseViewModel>
 
-<h2>Profilul meu</h2>
-<p>Pagină în construcție… aici poți edita datele tale personale.</p>
+<div class="container">
+    <h2>Profilul Meu</h2>
+
+    @if (!Model.Any())
+    {
+        <p>Nu există achiziții disponibile.</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Produs</th>
+                    <th>Cantitate (kg)</th>
+                    <th>Preț per kg (MDL)</th>
+                    <th>Preț total (MDL)</th>
+                    <th>Data Achiziției</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">@item.Nume</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">@item.Cantitate</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">@item.PretPerKg</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">@(item.Cantitate * item.PretPerKg)</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">@item.DataAchizitie.ToString("dd-MM-yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

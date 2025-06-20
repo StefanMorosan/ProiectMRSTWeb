@@ -16,7 +16,7 @@ namespace SpiceMarket_Web.Controllers
             {
                 var totalProducts = db.Produse.Count();
                 var totalUsers = db.Utilizators.Count();
-                var totalSales = db.Purchases.Sum(p => p.Cantitate); // Calculate total sales
+                var totalSales = db.Purchases.Sum(p => p.Quantity); // Calculate total sales
                 ViewBag.TotalProducts = totalProducts;
                 ViewBag.TotalUsers = totalUsers;
                 ViewBag.TotalSales = totalSales;

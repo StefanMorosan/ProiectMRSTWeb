@@ -1,17 +1,21 @@
-﻿﻿@model List<SpiceMarket_Web.Domain.Models.CartItem>
+﻿@model List<SpiceMarket_Web.Domain.Models.CartItem>
+@using SpiceMarket_Web.Domain.Models
+@using System.Globalization
+@using System.Text
+
 @{
     ViewBag.Title = "Coșul meu";
-    // Define the product list in the view to look up prices
-    var produse = new List<SpiceMarket_Web.Domain.Models.Produs>
-{
-        new SpiceMarket_Web.Domain.Models.Produs { Nume = "Scorțișoară", Pret = 80m },
-        new SpiceMarket_Web.Domain.Models.Produs { Nume = "Curcuma", Pret = 70m },
-        new SpiceMarket_Web.Domain.Models.Produs { Nume = "Piper", Pret = 90m },
-        new SpiceMarket_Web.Domain.Models.Produs { Nume = "Ghimbir", Pret = 60m },
-        new SpiceMarket_Web.Domain.Models.Produs { Nume = "Paprika", Pret = 75m },
-        new SpiceMarket_Web.Domain.Models.Produs { Nume = "Cardamom", Pret = 120m },
-        new SpiceMarket_Web.Domain.Models.Produs { Nume = "Turmeric", Pret = 70m }
-    };
+
+    // Fetch product data from the database
+    var db = new SpiceMarketContext();
+    var produse = db.Produse.ToList();
+
+    // Helper function to normalize and compare strings
+    Func<string, string> normalize = s => string.IsNullOrWhiteSpace(s)
+        ? s
+        : string.Concat(s.Normalize(NormalizationForm.FormD)
+        .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark))
+        .ToLowerInvariant();
 
     // Calculate the total price
     decimal totalPrice = 0m;
@@ -19,8 +23,9 @@
     {
         foreach (var item in Model)
         {
-            var produs = produse.FirstOrDefault(p => p.Nume == item.Nume);
-            var pretPerKg = produs != null ? produs.Pret : 0m;
+            // Normalize names and perform case-insensitive matching
+            var produs = produse.FirstOrDefault(p => normalize(p.Nume) == normalize(item.Nume));
+            var pretPerKg = produs != null ? produs.Pret : 0m; // Ensure price is fetched correctly
             totalPrice += pretPerKg * item.Cantitate;
         }
     }
@@ -51,7 +56,7 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    var produs = produse.FirstOrDefault(p => p.Nume == item.Nume);
+                    var produs = produse.FirstOrDefault(p => normalize(p.Nume) == normalize(item.Nume));
                     var pretPerKg = produs != null ? produs.Pret : 0m;
                     var pretTotal = pretPerKg * item.Cantitate;
                     <tr>
